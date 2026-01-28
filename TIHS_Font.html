@@ -1,0 +1,1135 @@
+<!-- Hi. If you're reading this then I will assume you know the basic shit already. -->
+<!-- ao20260128: Polishing + Added new characters. -->
+<!DOCTYPE html>
+<html class="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>TIHS_Font</title>
+	<link rel="icon" type="image/x-icon" href="TIHS_Icon_208.png">
+	
+	<!-- Added -->	
+	<style>
+		:root {
+			--color-page-back: #111;
+			--color-menu-back: #222;
+			--color-section-back: #333;
+			--color-section-fore: #444;
+			--color-text-offwhite: #ddd;
+			--color-text-offwhite-placeholder: #aaa;
+			--color-text-grey: #999;
+		}
+		body{
+			color: white;
+			font-family: system-ui, Roboto, Arial, sans-serif;
+			background-color: var(--color-page-back);
+			margin: 0;
+		}
+		.row{
+			display: flex;
+   			flex-wrap: wrap;
+		}
+		#divLightkeeper{
+			display: none;
+			/*position: fixed;
+			bottom: 0px;*/
+			width: 100%;
+			background-color: #dedede; 
+			color: #000;
+		}
+		.section{
+			padding: .25rem 1rem;
+			/*padding-top: 5rem;*/
+			background-color: var(--color-section-back);
+			width: 75%; 
+			max-width: 1500px !important; 
+			margin: auto;
+		}
+		.sub-body{
+			border-radius: .5rem;
+			background-color: var(--color-section-back);
+			padding: .25rem .75rem;
+		}
+		
+		.div-center{
+			width: fit-content;
+			margin: 0 auto;
+		}
+		.border{
+			border: 1px solid;
+			border-radius: .25rem;
+			border-color: var(--color-text-grey);
+			padding: .25rem;
+			max-width: calc(100% - 2px);
+		}
+		.border-white{
+			border-color: #FFF;
+		}
+		.btn{
+			display: inline-block;
+			border-style: solid; 
+			border-width: 1px;
+			border-radius: .5rem;
+			padding: .2rem .5rem;
+			text-align: center;
+			text-decoration: none;
+			vertical-align: middle;
+			width: fit-content;
+			background-color: var(--color-section-fore);
+			border-color: var(--color-text-grey);
+
+			/*Prevent selecting text on double click*/
+			user-select: none; /* standard syntax */
+			-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+			-moz-user-select: none; /* mozilla browsers */
+			-khtml-user-select: none; /* webkit (konqueror) browsers */
+			-ms-user-select: none; /* IE10+ */
+		}
+		.btn:hover{
+			cursor: pointer;
+			color: #000 !important;
+			background-color: #FFF !important;
+		}
+		.btn-block-new-form{
+			padding: .1rem .5rem;
+		}
+		.form-control{
+			background-color: var(--color-section-back);
+			color: var(--color-text-offwhite);
+			border: 1px solid #555;
+			border-radius: .25rem;     
+			width: calc(100% - 1.5rem);
+			margin: .1rem 0;
+			padding: .3rem .7rem;
+			font-size: inherit;
+		}
+		.form-control::placeholder{
+			color: var(--color-text-grey);
+		}
+		.fc-basic{
+			background-color: var(--color-section-back);
+			color: var(--color-text-offwhite);
+			border: 1px solid #555;
+			border-radius: .25rem;
+			font-size: inherit;
+		}
+		.fc-basic::placeholder{
+			color: var(--color-text-grey);
+		}
+		.fl{
+			float: left;
+		}
+		.fr{
+			float: right;
+		}
+		.text-center{
+			text-align: center;
+		}
+		.text-right{
+			text-align: right;
+		}
+		.text-left{
+			text-align: left;
+		}
+		.text-white{
+			color: white !important;
+		}
+		.btn-block-new-form{/*.form-new-block*/
+			margin-top: .251rem;
+		}
+		.open-section{
+			cursor: pointer;
+		}
+
+		.d-inline{
+			display: inline;
+		}
+		.m-auto{
+			margin: auto;
+		}
+		.m-0{
+			margin: 0px;
+		}
+		.mt-0{
+			margin-top: 0px;
+		}
+		.mb-0{
+			margin-bottom: 0px;
+		}
+		.mx-0{
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+		.p-0{
+			padding: 0px;
+		}
+		.pb-0{
+			padding-bottom: 0px;
+		}
+
+		.w-100{
+			width: 100%;
+		}
+		.w-50{
+			width: 50%;
+		}
+		/*"-b" Remove default Border width contributors*/
+		.w-100-b{
+			width: calc(100%  - 2px - .50rem); 
+		}
+		/*"-m" mobile turns width 100% on smaller screens*/
+		.w-50-m{
+			width: 50%;
+		}
+
+		.fz-1-25{
+			font-size: 1.25rem;
+		}
+		.fz-1-5{
+			font-size: 1.5rem;
+		}
+		.fz-2{
+			font-size: 2rem;
+		}
+		.items-center{
+			align-items: center;
+		}
+		.bg-red{
+			background-color: rgb(199, 0, 0); !important;
+		}
+		.bg-green{
+			background-color: rgb(0, 199, 0); !important;
+		}
+		.bg-blue{
+			background-color: rgb(0, 0, 199); !important;
+		}
+		@media screen and (max-width: 1111px) {
+			.section{
+				width: 100%; 
+			}
+			/*Mobile widths*/
+			.w-50-m{
+				width: 100%;
+			}
+		}
+	</style>
+
+	<!-- Side Bar -->
+	<style>
+		.stuck {
+			position: sticky; 
+			min-height: 100%; 
+			top:0px;
+		}
+		#sidebarMenu{
+			display: block; 
+			float:left;
+			padding: .25rem 1rem;
+			background-color: var(--color-menu-back);
+		}
+		#stickyMenu {
+			display: none;
+			position: fixed;
+			left: 1px;
+			bottom: 1px;
+			background-color: rgba(20, 20, 20, 0.75);/**/
+			margin-bottom: calc(var(--bs-gutter-x) * .5);
+		}
+		.btn-icon{
+			font-size: 2em;
+			text-align: center;
+			height: 1.5em;
+			width: 1.5em;
+			border: white;
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 100%;
+		}
+		.sb-item{
+			padding: .5rem;
+		}
+		ul.no-bullets {
+			list-style-type: none; /* Remove bullets */
+			padding: 0; /* Remove padding */
+			margin: 0; /* Remove margins */
+		}
+		.nonlink{
+			color: inherit;
+			text-decoration: none;
+		}	
+	</style>
+
+	<!-- TIHS_Font -->
+	<style>
+		.grid-cell{
+			width: 1.5em !important;
+			height: 1.5em !important;
+			border-width: 1px;
+			border-style: solid;
+		}
+		.bd-rad-025{
+			border-radius: 0.25rem;
+		}
+		#btnDrop{
+			padding: .5rem;
+			background-color: green;
+		}
+	</style>
+
+	<!-- Dynamic CSS -->
+	<style id="styleDynamic">
+	</style>
+</head>
+<body>	
+	<!-- Sidebar Menu -->
+	<div id="sidebarMenu" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark stuck" style=" min-width: fit-content !important;">
+		<div class="text-white" style="min-height: 100vh !important;">
+			<div id="/" class="">
+				<h1 class="">TIHS_Font</h1>
+			</div>
+			<ul class="no-bullets" id="menu" style="width: 100%;">
+				<li class="sb-item">
+					<span class="open-section" data-section="Home">Home</span>
+				</li>
+			</ul>
+			<hr>
+			<div id="closeMenu" class="border text-center" style="border-radius: 10px; width: 100%; margin-bottom: 2rem; cursor: pointer;">
+				<i class="bi-dash"></i> <span class="ms-1 d-none d-sm-inline" style="color: rgb(190, 190, 190);">Close Menu</span><i class="bi-plus" style="display: none;"></i>
+			</div>
+		</div>
+	</div>
+		
+	</div>
+	<div class="container-fluid">
+		<div class="">
+
+			<!-- Main Body -->
+			<div class="col py-3">
+				<div id="sectionHome" class="section text-center" style="display: block;">
+					<div class="">
+						<div id="divAbout" style="display: none;">
+							<h1 class="mb-0">TIHS Font Generator</h1>
+							<span id="currentVersion"></span>
+							<h6 class="m-0">By: TIHS_CODE</h6>
+							<h6 class="m-0"><a href="https://tihs-code.neocities.org/" target="_blank" class="btn" style="color: inherit;">Check out my other projects</a></h6>
+							<p>
+								Make text like my logo. For now it's only 3x3 Cell font style; Maybe BorgBorg style in the future. <br>
+								If it looks like a mess set the "Max Characters per Row" setting to a different number, wider screens can display wider text.<br>
+								lmk if you want more options to customize the text. 
+							</p>
+							<hr>
+						</div>
+						<div id="formCustomCell">
+							<div class="border">
+								<br>
+								<h4 class="mx-0">Write stuff down below:</h4>
+								<!-- abcdefg&#10;hijk &#10;lmnop&#10;qrstuv&#10;wxyz -->
+								<textarea id="inputTxt" class="fc-basic w-100-b" rows="7">The quick&#10;brown fox&#10;jumps over&#10;the lazy dogs&#10;0123456789&#10;!"'()*+,-./&#10;:;<=>?&#10;[]\^_</textarea>
+								<h2>
+									Settings
+									<span class="btn btn-toggle-plus" data-target="divTextSettings" style="padding: 0 .5rem;">+</span>
+								</h2>
+								<div id="divTextSettings" style="display: none;">
+									<h4 class="mx-0">Max Characters per Row (Set 0 for no limit):</h4>
+									<input id="inputMaxCharRow" class="fc-basic w-100-b" type="number">
+									<br><br>
+									<h4 class="mx-0">Font Color</h4>
+									<input id="inputFontColor" class="fc-basic w-100-b" type="color">
+									<br><br>
+									<h4 class="mx-0">Background Color</h4>
+									<input id="inputBGColor" class="fc-basic w-100-b" type="color">
+									<br><br>
+									<h4 class="mx-0">Cell Border Color</h4>
+									<input id="inputCellBorderColor" class="fc-basic w-100-b" type="color">
+									<br><br>
+									<h4 class="mx-0">Outer Border Color</h4>
+									<input id="inputOuterBorderColor" class="fc-basic w-100-b" type="color">
+									<br><br>
+									<h3>Presets:</h3>
+									<span class="btn btn-preset-load" data-target="0">Load Preset 1</span>
+									<span class="btn btn-preset-load" data-target="1">Load Preset 2</span>
+									<span class="btn btn-preset-load" data-target="2">Load Preset 3</span>
+									<br><br>
+									<span class="btn btn-preset-ovw" data-target="0">Overwrite Preset 1</span>
+									<span class="btn btn-preset-ovw" data-target="1">Overwrite Preset 2</span>
+									<span class="btn btn-preset-ovw" data-target="2">Overwrite Preset 3</span>
+									<br><br>
+									<span id="btnResetDefaults" class="btn">Reset to Defaults</span>
+								</div>
+								<br><br>
+								<span id="btnWrite" class="btn bg-green">Write</span>
+								<span id="btnInfo" class="btn ">Info</span>
+							</div>
+						</div>
+						<br>
+						<div id="divResult"></div>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="stickyMenu" class="btn-icon" style="vertical-align: baseline;">...</div>
+	</div>
+
+	<script>
+		// === === === General Functions 1 === === === =====================================================================================================================================================================================================
+		var isLogged = true;
+		function ConLog(string, override = false){
+			//isLogged = true; //Uncomment to show ALL Logs
+			if(isLogged || override) console.log(string);
+		}
+		function SplitTrim(string, splitter = ","){ //ConLog(string);
+			return string.split(splitter).map((c) => c.trim()); //.map(function(cb) { return cb.trim(); });
+		}
+		function isValidX5(value){
+			return value && value != null && value != undefined && value != "null" && value != "undefined";
+		}
+		function CreateEmpty2DArray(rows) {
+			let arrEmpty = [];
+			for (var i = 0; i < rows; i++) {
+				arrEmpty.push([]);
+			}
+			return arrEmpty;
+		}
+
+		//Helper Functions
+		function ToggleDisplayById(name){
+			if(document.getElementById(name).style.display != "none"){
+				document.getElementById(name).style.display = "none";
+			}else{
+				document.getElementById(name).style.display = "block";
+			}
+		}
+		function DisplayById(name, newDisplay){ //ConLog("DisplayById: "+name+", "+newDisplay)
+			document.getElementById(name).style.display = newDisplay;
+		}
+		function DisplayByClass(name, newDisplay, sheetID = null){
+			let arrTemp = document.getElementsByClassName(name);
+			for(let i = 0; i < arrTemp.length; i++) {
+				let isValid = sheetID == null || (sheetID != null && sheetID == arrTemp[i].getAttribute("data-sheetID"));
+				if(isValid) arrTemp[i].style.display = newDisplay;
+			}
+		}
+		function BorderByClass(name, newBorder, sheetID = null, check = null){ //ConLog("BorderByClass, name: "+name+", newBorder: "+newBorder+", sheetID: "+sheetID+", check: "+check);
+			let arrTemp = document.getElementsByClassName(name);
+			for(let i = 0; i < arrTemp.length; i++) {
+				let isValid = (sheetID == null || (sheetID != null && sheetID == arrTemp[i].getAttribute("data-sheetID"))) 
+							&& (check == null || (check != null && check == arrTemp[i].style.borderStyle))
+				if(isValid) arrTemp[i].style.borderStyle = newBorder;
+			}
+		}
+		function AddClassByClass(name, forAddition, sheetID = null){
+			let arrTemp = document.getElementsByClassName(name);
+			for(let i = 0; i < arrTemp.length; i++) {
+				let isValid = sheetID == null || (sheetID != null && sheetID == arrTemp[i].getAttribute("data-sheetID"));
+				if(isValid)
+					arrTemp[i].classList.add(forAddition);
+			}
+		}
+		function RemoveClassByClass(name, forRemoval, sheetID = null){
+			let arrTemp = document.getElementsByClassName(name);
+			for(let i = 0; i < arrTemp.length; i++) {
+				let isValid = sheetID == null || (sheetID != null && sheetID == arrTemp[i].getAttribute("data-sheetID"));
+				if(isValid)
+					arrTemp[i].classList.remove(forRemoval);
+			}
+		}
+		function InnerHTMLByClass(name, newText, sheetID = null){
+			let arrTemp = document.getElementsByClassName(name);
+			for(let i = 0; i < arrTemp.length; i++) {
+				let isValid = sheetID == null || (sheetID != null && sheetID == arrTemp[i].getAttribute("data-sheetID"));
+				if(isValid)
+					arrTemp[i].innerHTML = newText;
+			}
+		}
+		function SetTogglables(){
+			let arrToggleables = document.getElementsByClassName("togglable-block");
+			for(let i = 0; i < arrToggleables.length; i++) {
+				arrToggleables[i].onclick = function() {
+					let target = this.getAttribute("data-target"); 
+					let forToggle = document.getElementById(target);
+					if(forToggle.classList.contains('is-active')){
+						forToggle.classList.remove('is-active');
+						DisplayById(target, "none");
+					}else{
+						forToggle.classList.add('is-active');
+						DisplayById(target, "block");
+					}
+				}
+			}
+		}
+
+		//Toggle basic divs
+		const arrTglBasic = document.getElementsByClassName("btn-toggle");
+		for(let i = 0; i < arrTglBasic.length; i++) {
+			arrTglBasic[i].onclick = function() {
+				ToggleDisplayById(this.getAttribute("data-target"));
+			}
+		}
+		//Toggle basic divs, with plus minus buttons
+		const arrTglPlusMinus = document.getElementsByClassName("btn-toggle-plus");
+		for(let i = 0; i < arrTglPlusMinus.length; i++) {
+			arrTglPlusMinus[i].onclick = function() {
+				let target = this.getAttribute("data-target")
+				if(this.innerHTML == "+"){
+					this.innerHTML = "-";
+					DisplayById(target, "block");
+				}else{
+					this.innerHTML = "+";
+					DisplayById(target, "none");
+				}
+			}
+		}
+		
+		document.getElementById("stickyMenu").onclick = function() {
+			DisplayById("stickyMenu", "none");
+			DisplayById("sidebarMenu", "block");
+		}
+		document.getElementById("closeMenu").onclick = function() {
+			//ConLog("test");
+			DisplayById("sidebarMenu", "none");
+			DisplayById("stickyMenu", "block");
+		}
+		
+		// === === === Database ======================================================================================================================================================================================
+		const currentVersion = "0.1.2";
+		document.getElementById("currentVersion").innerHTML = "v"+currentVersion;
+		
+		const storageUserData = "tihs-2025-customcellfont-storageUserData";
+		const storagePresets = "tihs-2025-customcellfont-storagePresets";
+		const actionUserData = "!U!";
+		const actionUserDataInner = "!u!";
+
+		const maxPresets = 3;
+
+		const defCellDimension = 1.5;
+		const defCellBorderWidth = 1;
+		const defCellTextColor = "#000000";
+		const defCellBackgroundColor = "#555555";
+		const defOuterBorderColor = "#FFFFFF";
+		const defCellBorderRadius = "50%";
+		const defCellBorderStyle = "solid";
+		const defCellBorderColor = "#666666";
+
+		//Class object for setting presets
+		class SettingPreset {
+			constructor(stringObj) {
+				if(stringObj) this.ImportStringToThis(stringObj);
+			}
+			ImportStringToThis(stringObj){  //ConLog("class Suit arrSuitDetails: ");ConLog(blockSplit);
+				let stringSplit = SplitTrim(stringObj, actionUserDataInner);
+				let s = 0;
+				let temp = stringSplit[s++]; temp ??= "";
+				if(isValidX5(temp)) this.maxCharRow = temp; 			temp = stringSplit[s++];
+				if(isValidX5(temp)) this.outerBorderColor = temp; 		temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellWidth = temp; 				temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellHeight = temp; 			temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellTextColor = temp; 			temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellBackgroundColor = temp; 	temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellBorderStyle = temp; 		temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellBorderWidth = temp; 		temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellBorderRadius = temp; 		temp = stringSplit[s++];
+				if(isValidX5(temp)) this.cellBorderColor = temp;
+			}
+			ImportArrayToThis(arr){
+				let i = 0;
+				this.maxCharRow = arr[i++];
+				this.outerBorderColor = arr[i++];
+				this.cellWidth = arr[i++];
+				this.cellHeight = arr[i++];
+				this.cellTextColor = arr[i++];
+				this.cellBackgroundColor = arr[i++];
+				this.cellBorderStyle = arr[i++];
+				this.cellBorderWidth = arr[i++];
+				this.cellBorderRadius = arr[i++];
+				this.cellBorderColor = arr[i++];
+			}
+			ToString(splitter = actionUserDataInner){
+				return this.maxCharRow +splitter+ this.outerBorderColor +splitter+ 
+					this.cellWidth +splitter+ this.cellHeight +splitter+ this.cellTextColor +splitter+ this.cellBackgroundColor +splitter+ 
+					this.cellBorderStyle +splitter+ this.cellBorderWidth +splitter+ this.cellBorderRadius +splitter+ this.cellBorderColor;
+			}
+			ToArray(splitter = actionUserDataInner){
+				return SplitTrim(this.ToString(), splitter);
+			}
+		}
+		var currentSettingPreset = new SettingPreset(null);
+		function DisplayStorage(storage = storageUserData){
+			document.getElementById("inputMaxCharRow").value = currentSettingPreset.maxCharRow;
+			document.getElementById("inputOuterBorderColor").value = currentSettingPreset.outerBorderColor;
+			document.getElementById("inputFontColor").value = currentSettingPreset.cellTextColor;
+			document.getElementById("inputBGColor").value = currentSettingPreset.cellBackgroundColor;
+			document.getElementById("inputCellBorderColor").value = currentSettingPreset.cellBorderColor;
+		}
+		function ManualSetCurrentSettings(
+				setMCR = 0, setOBC = defOuterBorderColor
+				, setCW = defCellDimension, setCH = defCellDimension, setCTC = defCellTextColor, setCBGC = defCellBackgroundColor
+				, setCBS = defCellBorderStyle, setCBW = defCellBorderWidth, setCBR = defCellBorderRadius, setCBC = defCellBorderColor) {
+
+			currentSettingPreset.ImportArrayToThis([setMCR, setOBC, setCW, setCH, setCTC, setCBGC, setCBS, setCBW, setCBR, setCBC]);
+			DisplayStorage();
+		}
+
+		//Set default values for storage and setting presets
+		ManualSetCurrentSettings();
+		var arrFontSettingPresets = [];
+		var defaultStorageStringPresets = "";
+		function GetStorageString(storage = storageUserData){
+			let storageString = "";
+			if(storage == storageUserData){
+				storageString += currentSettingPreset.ToString();
+			}else if(storage == storagePresets){
+				for (var i = 0; i < maxPresets; i++) {
+					storageString += i == 0 ? "" : actionUserData;
+					storageString += arrFontSettingPresets[i].ToString();
+				}
+			}
+			return storageString;
+		}
+		const defaultStorageStringUserData = GetStorageString();
+		const defaultSettingPreset = new SettingPreset(defaultStorageStringUserData);
+		for (var i = 0; i < maxPresets; i++) {
+			//ConLog("Set Default Values, defaultStorageStringUserData: "+defaultStorageStringUserData, true);
+			arrFontSettingPresets.push(new SettingPreset(defaultStorageStringUserData));
+			defaultStorageStringPresets += i == 0 ? "" : actionUserData;
+			defaultStorageStringPresets += defaultStorageStringUserData;
+		}
+
+		function SetCurrentSettings(isForReset = false) {
+			if(isForReset){
+				ManualSetCurrentSettings();
+			}else{
+				ManualSetCurrentSettings(
+					document.getElementById("inputMaxCharRow").value
+					, document.getElementById("inputOuterBorderColor").value
+					, currentSettingPreset.cellWidth
+					, currentSettingPreset.cellHeight
+					, document.getElementById("inputFontColor").value
+					, document.getElementById("inputBGColor").value
+					, currentSettingPreset.cellBorderStyle
+					, currentSettingPreset.cellBorderWidth
+					, currentSettingPreset.cellBorderRadius
+					, document.getElementById("inputCellBorderColor").value);
+			}
+		}
+
+		function LoadStorage(storage = storageUserData, override = null){ 
+			let storageString = localStorage.getItem(storage); 
+			let storageSplitter = "";
+
+			//Verify then split storage strings
+			if(override != null) storageString = override;
+			if(storage == storageUserData){
+				storageString = storageString ? storageString : defaultStorageStringUserData; //ConLog("LoadStorage: "+storage+", storageString: "+storageString, true);
+				currentSettingPreset.ImportStringToThis(storageString);
+
+			}else if(storage == storagePresets){
+				storageSplitter = actionUserData;
+				storageString = storageString ? storageString : defaultStorageStringPresets;
+				let stringSplitStorage = SplitTrim(storageString, storageSplitter); //ConLog("LoadStorage: "+storage+", storageString: "+storageString, true);
+				for (var i = 0; i < stringSplitStorage.length; i++) {
+					arrFontSettingPresets[i] = new SettingPreset(stringSplitStorage[i]);
+					//ConLog("LoadStorage: "+storage+", arrFontSettingPresets["+i+"]: "+arrFontSettingPresets[i].ToString(), true); //ConLog(arrFontSettingPresets[i]);
+				}
+			}
+
+			DisplayStorage(storage);
+		}
+
+		function UpdateStorage(storage = storageUserData, override = false, isForReset = false){ 
+			let isConfirmed = true;
+			let defaultStorage = null;
+
+			//Set Reset confirmation and correct default storage data
+			if(isForReset){
+				let txtMsg = (storage == storageUserData ? "User Data" 
+							: (storage == storagePresets ? "Preset Data" 
+							: "ERR"));
+				isConfirmed = isForReset && !override ? window.confirm(txtMsg+" will be restored to the default. Continue with resetting "+txtMsg+"?") : true;
+				defaultStorage = (storage == storageUserData ? defaultStorageStringUserData 
+								: (storage == storagePresets ? defaultStorageStringPresets 
+								: null));
+			}
+
+			//Update the actual Storage
+			if(isConfirmed) {
+				if(storage == storageUserData) SetCurrentSettings(isForReset);
+				let storageData = isForReset ? defaultStorage : GetStorageString(storage); 
+				localStorage.setItem(storage, storageData); //ConLog("UpdateStorage("+storage+"), storageData: "+storageData);
+				LoadStorage(storage);
+			}
+			DisplayStorage(storage);
+		}
+
+
+		// === Custom Cell Letters ======================================================
+		var cellDimension = 3;
+		var arrLetters3x3 = {32: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // Space
+
+							, 33: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // !
+
+							, 34: [	[[1, [1, 1, 1, 1], [0, 0, 1, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // "
+
+							, 39: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // '
+
+							, 40: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // (
+
+							, 41: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // )
+
+							, 42: [	[[1, [1, 1, 1, 1], [0, 1, 0, 1]], 	[1, [1, 1, 1, 1], [0, 0, 1, 1]], 	[1, [1, 1, 1, 1], [1, 0, 1, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 1, 1, 1], [1, 0, 1, 0]], 	[1, [1, 1, 1, 1], [1, 1, 0, 0]], 	[1, [1, 1, 1, 1], [0, 1, 0, 1]]]] // *
+
+							, 43: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [0, 0, 0, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // +
+
+							, 44: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // ,
+
+							, 45: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // -
+
+							, 46: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // .
+
+							, 47: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 0, 1, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 1, 1, 1], [1, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // /
+
+
+							, 48: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 1, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // 0
+
+							, 49: [	[[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [0, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // 1
+
+							, 50: [	[[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // 2
+
+							, 51: [	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // 3
+
+							, 52: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // 4
+
+							, 53: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // 5
+
+							, 54: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // 6
+
+							, 55: [	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // 7
+
+							, 56: [	[[1, [1, 0, 0, 1], [1, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 1, 0]]]
+								, 	[[1, [0, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // 8
+
+							, 57: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // 9
+
+
+
+							, 58: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // :
+
+							, 59: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // ;
+
+							, 60: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]]]
+								, 	[[1, [1, 1, 0, 1], [1, 0, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]] // <
+							/*	, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]] //*/ // Alt <
+
+							, 61: [	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // =
+
+							, 62: [	[[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 1, 1, 0]]]
+								, 	[[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // >
+							/*	, 	[[1, [0, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 0, 0]]]] //*/ // Alt >
+
+							, 63: [	[[1, [1, 0, 1, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [1, 0, 0, 1]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 1, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // ?
+
+
+						/*	, 65: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] //*/ // A, reverse V
+
+							, 65: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] //*/ //A, reverse U
+
+							, 66: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 1, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // B
+
+							, 67: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]]]] // C
+
+							, 68: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // D
+
+							, 69: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // E
+
+							, 70: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // F
+
+							, 71: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // G
+
+							, 72: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // H
+
+							, 73: [	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 0, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [0, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // I
+
+							, 74: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 1, 0, 1], [1, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // J
+
+							, 75: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [1, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 1, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // K
+
+							, 76: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // L
+
+							, 77: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 0, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // M
+
+							, 78: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [0, 1, 1, 0], [0, 0, 0, 0]]]] // N
+
+							, 79: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // O
+
+							, 80: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // P
+
+							, 81: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 1, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 1, 0]], 	[1, [0, 1, 1, 0], [0, 1, 0, 1]]]] // Q
+
+							, 82: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 1, 0]]]
+								, 	[[1, [0, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]]]] // R
+
+							, 83: [	[[1, [1, 0, 0, 1], [1, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 1, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // S
+
+							, 84: [	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 0, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // T
+
+							, 85: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // U
+
+							, 86: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 1, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [1, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // V
+
+							, 87: [	[[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 1]], 	[1, [0, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 1, 0]]]] // W
+
+							, 88: [	[[1, [1, 1, 1, 1], [0, 0, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 1, 1, 1], [1, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 1, 0, 0]]]] // X
+
+							, 89: [	[[1, [1, 1, 1, 1], [0, 0, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 0, 1, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // Y
+
+							, 90: [	[[1, [1, 0, 1, 1], [0, 0, 0, 1]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 0]]]] // Z
+
+							, 91: [	[[1, [1, 0, 0, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 1, 0, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [0, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // [
+
+							, 92: [	[[1, [1, 1, 1, 1], [0, 1, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 1, 0, 1]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [0, 1, 0, 1]]]] // \
+
+							, 93: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 0, 0], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 0, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [0, 1, 1, 0], [0, 0, 0, 0]]]] // ]
+
+							, 94: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 1], [1, 1, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [1, 0, 1, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 1, 0, 1]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]] // ^
+
+							, 95: [	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]], 	[0, [1, 1, 1, 1], [0, 0, 0, 0]]]
+								, 	[[1, [1, 0, 1, 1], [0, 0, 0, 0]], 	[1, [1, 0, 1, 0], [0, 0, 0, 0]], 	[1, [1, 1, 1, 0], [0, 0, 0, 0]]]] // _
+							};
+
+		function FindLetter(ascii) {
+			if(cellDimension == 3){
+				for (var key in arrLetters3x3) {
+					if(key == ascii){
+						return arrLetters3x3[key];
+					}
+				}
+			}
+		}
+
+		// === Custom Cell functions ======================================================
+		var cellID = 0;
+
+		function CreateCell(objLetterCell) {
+			let currSP = currentSettingPreset;
+			//Set Cell style based on current Letter
+			let cellBgColor = objLetterCell[0] == 1 ? currSP.cellTextColor : currSP.cellBackgroundColor;
+			let cellBorderRadiusTL = objLetterCell[2][0] == 1 ? currSP.cellBorderRadius : "0px";
+			let cellBorderRadiusTR = objLetterCell[2][1] == 1 ? currSP.cellBorderRadius : "0px";
+			let cellBorderRadiusBR = objLetterCell[2][2] == 1 ? currSP.cellBorderRadius : "0px";
+			let cellBorderRadiusBL = objLetterCell[2][3] == 1 ? currSP.cellBorderRadius : "0px";
+			let borderRadius = cellBorderRadiusTL+" "+cellBorderRadiusTR+" "+cellBorderRadiusBR+" "+cellBorderRadiusBL;
+			let cellBorderColorT = objLetterCell[1][0] == 1 ? currSP.cellBorderColor : cellBgColor;
+			let cellBorderColorR = objLetterCell[1][1] == 1 ? currSP.cellBorderColor : cellBgColor;
+			let cellBorderColorB = objLetterCell[1][2] == 1 ? currSP.cellBorderColor : cellBgColor;
+			let cellBorderColorL = objLetterCell[1][3] == 1 ? currSP.cellBorderColor : cellBgColor;
+			let isAltFontBorderStyle = false
+			if(isAltFontBorderStyle){
+				cellBorderColorT = objLetterCell[1][0] == 2 ? currSP.cellTextColor : currSP.cellBorderColorT;
+				cellBorderColorR = objLetterCell[1][1] == 2 ? currSP.cellTextColor : currSP.cellBorderColorR;
+				cellBorderColorB = objLetterCell[1][2] == 2 ? currSP.cellTextColor : currSP.cellBorderColorB;
+				cellBorderColorL = objLetterCell[1][3] == 2 ? currSP.cellTextColor : currSP.cellBorderColorL;
+			}
+			let borderColor = cellBorderColorT+" "+cellBorderColorR+" "+cellBorderColorB+" "+cellBorderColorL;
+			let txtCellID = "textCell"+(cellID++);
+			let cell = `<div id="`+txtCellID+`" class="p-0" style="
+				width: `+currSP.cellWidth+`em !important;
+				height: `+currSP.cellHeight+`em !important;
+				background-color: `+cellBgColor+`;
+				border-width: `+currSP.cellBorderWidth+`px;
+				border-radius: `+borderRadius+`;
+				border-style: `+currSP.cellBorderStyle+`;
+				border-color: `+borderColor+`; "></div>`;
+			return cell;
+		}
+		function CreateCellRow(arrObjLetterCells) {
+			let txtCell = "";
+			for (var i = 0; i < arrObjLetterCells.length; i++) {
+				txtCell += `<div class="row">`;
+				for (var j = 0; j < arrObjLetterCells[i].length; j++) {
+					txtCell += CreateCell(arrObjLetterCells[i][j]);
+				}
+				txtCell += `</div>`;
+			}
+			return txtCell;
+		}
+
+		//On Click Button: Write
+		document.getElementById("btnWrite").onclick = function() {
+			//Set the user assigned settings
+			UpdateStorage();
+			let currSP = currentSettingPreset;
+
+			//Write the text
+			cellID = 0;
+			let txtOrig = document.getElementById("inputTxt").value.toUpperCase();
+			let txtPrefix = `<!-- Logo (Collapse this) -->
+						<div class="">
+							<div id="divLogoOuter" class="border bd-rad-025 p-2 div-center" 
+									style="background-color: `+currSP.cellBackgroundColor+`; border-color: `+currSP.outerBorderColor+`;">
+								<div id="divLogoInner" class="p-0" 
+										style="width: fit-content; border-style: solid; border-width: 1px; border-color: `+currSP.outerBorderColor+`;">
+									<div class="container bg-c-5" style="overflow: auto;">`;
+			let txtPostfix = `		</div>
+								</div>
+							</div>
+						</div>`;
+
+			//Get ASCII of the Text
+			/* 	32: Space
+				48: Zero
+				65: Capital A
+			//*/
+			let charCodes = [...txtOrig].map(char => char.charCodeAt(0)); //ConLog(charCodes);
+
+			//Loop through the cells per letter
+			let txtCell = "";
+			let tempCols = 0;
+			let gridCols = 0;
+			let arrObjLetters = [];
+			let arrObjLetterCells = CreateEmpty2DArray(cellDimension);
+			for (var c = 0; c < charCodes.length; c++) {
+				let ascii = charCodes[c];
+				if(ascii >= 32 && ascii <= 95){
+					let isNonSpace = ((ascii >= 33 && ascii <= 34) || (ascii >= 39 && ascii <= 63) || (ascii >= 65 && ascii <= 95));
+					ascii = isNonSpace ? ascii : 32;
+
+					//Concat letter into arrObjLetterCells
+					tempCols++;
+					let objLetter = FindLetter(ascii); 
+					for (var i = 0; i < objLetter.length; i++) {
+						arrObjLetterCells[i] = arrObjLetterCells[i].concat(objLetter[i]);
+					}
+				
+				}
+
+				//Check for New Line
+				let isMaxRowChars = currSP.maxCharRow > 0 ? tempCols == currSP.maxCharRow : false;
+				if(ascii == 10 || isMaxRowChars){
+					gridCols = gridCols < tempCols ? tempCols : gridCols;
+					tempCols = 0;
+
+					//New line, display text and reset arrObjLetterCells
+					arrObjLetters.push(arrObjLetterCells);
+					arrObjLetterCells = CreateEmpty2DArray(cellDimension);
+				}
+			}
+
+			//Concat last Row
+			arrObjLetters.push(arrObjLetterCells);
+			gridCols = gridCols < tempCols ? tempCols : gridCols;
+			tempCols = 0;
+
+			//Display
+			for (var i = 0; i < arrObjLetters.length; i++) {//ConLog(arrObjLetters[i]);
+				//Fill empty space with spaces
+				tempCols = arrObjLetters[i][0].length / 3; //ConLog(i+": "+gridCols+" > "+tempCols);
+				if(gridCols > tempCols){
+					for (var c = 0; c < gridCols - tempCols; c++) {
+						let objLetter = FindLetter(32); //32 = Space ascii 
+						for (var l = 0; l < objLetter.length; l++) {
+							arrObjLetters[i][l] = arrObjLetters[i][l].concat(objLetter[l]);
+						}
+					}
+				}
+				txtCell += CreateCellRow(arrObjLetters[i]);
+			}
+
+			let txtFinal = txtPrefix + txtCell + txtPostfix;
+			document.getElementById("divResult").innerHTML = txtFinal;
+		}
+
+		//On Click Button: Info
+		document.getElementById("btnInfo").onclick = function() {
+			ToggleDisplayById("divAbout");
+		}
+
+		//On Click Button: Reset to Defaults
+		document.getElementById("btnResetDefaults").onclick = function() {
+			let isConfirmed = true; //window.confirm("Settings and text will be restored to the default. Continue with resetting?");
+			if(isConfirmed){
+				UpdateStorage(storageUserData, true, true);
+				document.getElementById("inputTxt").value = 
+`The quick
+brown fox
+jumps over
+the lazy dogs
+0123456789
+!"'()*+,-./
+:;<=>?
+[]\\^_`;
+			}
+		}
+
+		//On Click Buttons: Presets
+		//Load Preset
+		const arrBtnPresetsLoad = document.getElementsByClassName("btn-preset-load");
+		for(let i = 0; i < arrBtnPresetsLoad.length; i++) {
+			arrBtnPresetsLoad[i].onclick = function() {
+				let presetID = this.getAttribute("data-target"); ConLog("btn-preset-load, "+presetID+":  ");
+				currentSettingPreset = new SettingPreset(arrFontSettingPresets[presetID].ToString()); ConLog(currentSettingPreset);
+				DisplayStorage();
+			}
+		}
+		//Overwrite Preset
+		const arrBtnPresetsOvw = document.getElementsByClassName("btn-preset-ovw");
+		for(let i = 0; i < arrBtnPresetsOvw.length; i++) {
+			arrBtnPresetsOvw[i].onclick = function() {
+				let presetID = parseInt(this.getAttribute("data-target")); //ConLog("btn-preset-ovw, "+presetID+":  "); 
+				SetCurrentSettings();
+				arrFontSettingPresets[presetID] = new SettingPreset(currentSettingPreset.ToString());
+				UpdateStorage(storagePresets); //ConLog(arrFontSettingPresets[presetID]);
+				alert("Saved current settings as Preset " + (presetID+1));
+			}
+		}
+
+		
+
+		// === Home to Game functions ======================================================
+		//Open Sections
+		const arrBtnOpenSections = document.getElementsByClassName("open-section");
+		for(let i = 0; i < arrBtnOpenSections.length; i++) {
+			arrBtnOpenSections[i].onclick = function() {
+				let section = this.getAttribute("data-section");
+				DisplayByClass("section","none");
+				DisplayById("section"+section, "block");
+			}
+		}
+
+
+
+		// === Start of page function calls ======================================================
+
+		//Start Page
+		LoadStorage();
+		LoadStorage(storagePresets);
+		
+		/*/ Reset Storage Data
+		UpdateStorage(storageUserData, true, true);
+		UpdateStorage(storagePresets, true, true);//*/
+
+		//Remove Storage Data
+		//localStorage.removeItem(storageUserData);
+		//localStorage.removeItem(storagePresets);
+
+		//Defaut settings
+		document.getElementById("closeMenu").click();
+		DisplayById("stickyMenu", "none");
+	</script>
+</body>
+</html>
